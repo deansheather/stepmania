@@ -39,7 +39,8 @@ void LightsDriver_LinuxPacDrive::Set( const LightsState *ls )
 
 	uint16_t outb = 0;
 
-        // This is original order from openitg-beta-2
+	// This is original order from openitg-beta-2
+	/*
 	if (ls->m_bCabinetLights[LIGHT_MARQUEE_UP_LEFT]) outb|=BIT(0);
 	if (ls->m_bCabinetLights[LIGHT_MARQUEE_UP_RIGHT]) outb|=BIT(1);
 	if (ls->m_bCabinetLights[LIGHT_MARQUEE_LR_LEFT]) outb|=BIT(2);
@@ -48,10 +49,22 @@ void LightsDriver_LinuxPacDrive::Set( const LightsState *ls )
 	if (ls->m_bGameButtonLights[GameController_1][GAME_BUTTON_START]) outb|=BIT(4);
 	if (ls->m_bGameButtonLights[GameController_2][GAME_BUTTON_START]) outb|=BIT(5);
 
-        if (ls->m_bCabinetLights[LIGHT_BASS_LEFT]) outb|=BIT(6);
+	if (ls->m_bCabinetLights[LIGHT_BASS_LEFT]) outb|=BIT(6);
 	if (ls->m_bCabinetLights[LIGHT_BASS_RIGHT]) outb|=BIT(7);
+	*/
 
-        if (ls->m_bGameButtonLights[GameController_1][DANCE_BUTTON_LEFT]) outb|=BIT(8);
+	// NOTE(Dean): I don't like the flashing lights, so I force all non-pad
+	// lights to be always on.
+	outb|=BIT(0);
+	outb|=BIT(1);
+	outb|=BIT(2);
+	outb|=BIT(3);
+	outb|=BIT(4);
+	outb|=BIT(5);
+	outb|=BIT(6);
+	outb|=BIT(7);
+
+	if (ls->m_bGameButtonLights[GameController_1][DANCE_BUTTON_LEFT]) outb|=BIT(8);
 	if (ls->m_bGameButtonLights[GameController_1][DANCE_BUTTON_RIGHT]) outb|=BIT(9);
 	if (ls->m_bGameButtonLights[GameController_1][DANCE_BUTTON_UP]) outb|=BIT(10);
 	if (ls->m_bGameButtonLights[GameController_1][DANCE_BUTTON_DOWN]) outb|=BIT(11);
